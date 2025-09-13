@@ -7,13 +7,14 @@ interface User {
 
 const UsersPage = async() => {
 
-    const res = await fetch('https://jsonplaceholder.typicode.com/users',
-        {next:{revalidate:10}} );
+    const res = await fetch('https://jsonplaceholder.typicode.com/users');
      const user :User [] =  await res.json();
 
   return (
     <div>
         <h1>Users</h1>
+        <p>{new Date().toLocaleTimeString()}</p>
+        {/* in static rendering while build time it will change the time but not in the dynamic */}
           <ul>
             {user.map(user=><li key={user.id} >{user.name}</li>)}
           </ul>
